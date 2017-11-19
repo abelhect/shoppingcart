@@ -1,2 +1,0 @@
-export const SET_PRODUCTS = 'SET_PRODUCTS';
-export const SET_SEARCHBAR_QUERY = 'SET_SEARCHBAR_QUERY';
