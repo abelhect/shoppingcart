@@ -1,2 +1,3 @@
 export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const SET_SEARCHBAR_QUERY = 'SET_SEARCHBAR_QUERY';
+export const SET_CART_TOTAL = 'SET_CART_TOTAL';

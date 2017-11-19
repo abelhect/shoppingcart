@@ -38,7 +38,7 @@ class Results extends Component {
             })
           }
         </ul>
-        <h2>Cart Total = $0</h2>
+        <h2>Cart Total = $ {this.props.sum}</h2>
       </div>
     )
   }
@@ -47,9 +47,12 @@ class Results extends Component {
 function mapStateToProps(state){
   const {products} = state;
   const {search} = state;
+  const {sum} = state;
   // console.log('products from mapStateToProps in Results', products);
   // console.log('query from mapStateToProps in Results', search);
-  return {products, search}
+  // console.log('sum from mapStateToProps in Results', sum);
+
+  return {products, search, sum}
 }
 
 export default connect(mapStateToProps, null) (Results);

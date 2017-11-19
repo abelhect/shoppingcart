@@ -11,3 +11,4 @@ const config ={
 
 export const firebaseApp = firebase.initializeApp(config);
 export const productRef = firebase.database().ref('products');
+export const cartRef = firebase.database().ref('productsToBuy');

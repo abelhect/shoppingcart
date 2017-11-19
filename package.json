@@ -2,6 +2,7 @@
   "name": "shoppingcart",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://abelhect.github.io/shoppingcart",
   "dependencies": {
     "firebase": "^4.6.2",
     "react": "^16.0.0",
