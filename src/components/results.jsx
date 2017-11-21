@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {ScrollComponent} from 'react-scrolling-container';
 import {setCartTotal} from '../actions';
 
 import Result from './result';

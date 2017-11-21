@@ -12,20 +12,28 @@ class Result extends Component {
   }
 
   buyProduct(){
-    //increase quantity for this product
-    this.setState({qty: this.state.qty + 1});
-    //update the total for the entire cart
-    // console.log('this products price', this.props.product.price/100, 'this product qty', this.state.qty + 1);
-    const productTotal = (this.state.qty + 1) * (this.props.product.price/100);
-    // console.log('this products total', productTotal);
-    this.updateCartTotal(productTotal);
+    if (this.state.qty > 0){
+      this.setState({qty: this.state.qty + 1});
+      const productTotal = this.props.product.price/100;
+      // console.log('this products total', productTotal);
+      this.updateCartTotal(productTotal);
+    } else {
+      //increase quantity for this product
+      this.setState({qty: this.state.qty + 1});
+      //update the total for the entire cart
+      // console.log('this products price', this.props.product.price/100, 'this product qty', this.state.qty + 1);
+      const productTotal = (this.state.qty + 1) * (this.props.product.price/100);
+      // console.log('this products total', productTotal);
+      this.updateCartTotal(productTotal);
+    }
   }
 
   removeFromCart(){
     if (this.state.qty > 0){
       this.setState({qty: this.state.qty - 1})
-      const productTotal = (this.state.qty - 1) * (this.props.product.price/100);
-      console.log('this products total', productTotal);
+      const productTotal = this.props.product.price/100;
+      // console.log('this products total', productTotal);
+      this.removeFromCartTotal(productTotal);
     }
   }
 
@@ -35,7 +43,16 @@ class Result extends Component {
     // console.log('cart total from updateCartTotal', updatedCartTotal);
     // console.log('cartTotal from the updateCartTotal in result', this.props.cartTotal);
     this.props.setCartTotal(updatedCartTotal);
-    console.log("DEMO-CartTotal is not working properly yet!-DEMO");
+    console.log("Warning: Quantities for each product are not persisted with Redux when using the search bar. Functionality needs work.");
+  }
+
+  removeFromCartTotal(productTotal){
+    // console.log('product total from updateCartTotal', productTotal);
+    const updatedCartTotal = Math.round((this.props.cartTotal - productTotal)*100)/100;
+    // console.log('cart total from updateCartTotal', updatedCartTotal);
+    // console.log('cartTotal from the updateCartTotal in result', this.props.cartTotal);
+    this.props.setCartTotal(updatedCartTotal);
+    console.log("Warning: Quantities for each product are not persisted with Redux when using the search bar. Functionality needs work.");
   }
 
   render(){
