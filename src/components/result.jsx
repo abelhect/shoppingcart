@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {setCartTotal} from '../actions';
 
@@ -30,10 +31,11 @@ class Result extends Component {
 
   updateCartTotal(productTotal){
     // console.log('product total from updateCartTotal', productTotal);
-    const updatedCartTotal = this.props.cartTotal + productTotal;
-    console.log('cart total from updateCartTotal', updatedCartTotal);
-
-    // this.setCartTotal(updatedCartTotal);
+    const updatedCartTotal = Math.round((this.props.cartTotal + productTotal)*100)/100;
+    // console.log('cart total from updateCartTotal', updatedCartTotal);
+    // console.log('cartTotal from the updateCartTotal in result', this.props.cartTotal);
+    this.props.setCartTotal(updatedCartTotal);
+    console.log("DEMO-CartTotal is not working properly yet!-DEMO");
   }
 
   render(){
@@ -47,9 +49,9 @@ class Result extends Component {
 
         <p>$ {price/100.00}</p>
         <p>{description}</p>
-          <button className="btn btn-sm btn-primary"
-            onClick={() => this.buyProduct()}>Buy</button>
-          <button className="btn btn-sm btn-primary"
+          <Button className="btn btn-sm btn-primary"
+            onClick={() => this.buyProduct()}>Buy</Button>
+          <button className="btn btn-sm"
             onClick={() => this.removeFromCart()}>Remove</button>
           <h4> Qty: {this.state.qty} item(s) </h4>
           <hr/>
@@ -60,7 +62,8 @@ class Result extends Component {
 
 function mapStateToProps(state){
   // console.log('state from the mapStateToProps in result', state);
-  return {}
+  const {cartTotal} = state;
+  return {cartTotal}
 }
 
 export default connect(mapStateToProps, {setCartTotal})(Result);

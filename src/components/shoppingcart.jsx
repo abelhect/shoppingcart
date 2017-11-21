@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {productRef} from '../firebase';
 import {setProducts} from '../actions';
-import {setCartTotal} from '../actions';
 
 import logo from '../images/logo.ico';
 import SearchBar from './searchbar';
@@ -10,13 +9,6 @@ import Results from './results';
 import Admin from './admin'
 
 class ShoppingCart extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      cartTotal: 0
-    }
-  }
-
   componentDidMount() {
     productRef.on('value', snap => {
         let products = [];
@@ -28,8 +20,6 @@ class ShoppingCart extends Component {
         })
         // console.log('products from inside componentDidMount', products);
         this.props.setProducts(products);
-        console.log('value of cartTotal from componentDidMount in shoppingcart ', this.state.cartTotal);
-        this.props.setCartTotal(this.state.cartTotal);
     })
   }
 
@@ -55,8 +45,8 @@ class ShoppingCart extends Component {
 }
 
 function mapStateToProps(state){
-  console.log('state from mapStateToProps in Shoppingcart', state);
+  // console.log('state from mapStateToProps in Shoppingcart', state);
   return{}
 }
 
-export default connect(mapStateToProps, {setProducts, setCartTotal})(ShoppingCart);
+export default connect(mapStateToProps, {setProducts})(ShoppingCart);

@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
+import {Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
+import {ScrollComponent} from 'react-scrolling-container';
+import {setCartTotal} from '../actions';
+
 import Result from './result';
 
 class Results extends Component {
   constructor(props){
     super(props);
     this.state = {
-      foundProducts: []
+      foundProducts: [],
+      cartTotal: 0
     }
   }
 
@@ -22,13 +27,20 @@ class Results extends Component {
     this.setState({
       foundProducts: foundProducts
     });
+    // console.log('value of cartTotal from componentWillReceiveProps in results ', this.state.cartTotal);
+
+    // this.props.setCartTotal(this.state.cartTotal);
+
   }
 
   render(){
     // console.log('products from Results Render', this.state.foundProducts);
     return(
       <div>
-        <h2>Product List</h2>
+        <Row>
+          <Col md={5} mdPush={5}><h3>Product List</h3></Col>
+          <Col md={6} mdPull={6}><h3>Cart Total = $ {this.props.cartTotal}</h3></Col>
+        </Row>
         <ul>
           {
             this.state.foundProducts.map((product, i) => {
@@ -38,7 +50,6 @@ class Results extends Component {
             })
           }
         </ul>
-        <h2>Cart Total = $ {this.props.sum}</h2>
       </div>
     )
   }
@@ -47,12 +58,11 @@ class Results extends Component {
 function mapStateToProps(state){
   const {products} = state;
   const {search} = state;
-  const {sum} = state;
+  const {cartTotal} = state;
   // console.log('products from mapStateToProps in Results', products);
   // console.log('query from mapStateToProps in Results', search);
-  // console.log('sum from mapStateToProps in Results', sum);
-
-  return {products, search, sum}
+  // console.log('state from mapStateToProps in Results', state);
+  return {products, search, cartTotal}
 }
 
-export default connect(mapStateToProps, null) (Results);
+export default connect(mapStateToProps, {setCartTotal}) (Results);
